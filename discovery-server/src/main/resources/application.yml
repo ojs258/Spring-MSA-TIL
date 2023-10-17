@@ -3,7 +3,7 @@ spring:
     active: port
 
 server:
-  port: ${port}
+  port: 8761
 
 eureka:
   client:
