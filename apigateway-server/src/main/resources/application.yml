@@ -1,2 +1,44 @@
 server:
   port: 8000
+spring:
+  application:
+    name: apigateway-server
+  cloud:
+    gateway:
+      default-filters:
+        - name: GlobalFilter
+          args:
+            message: Global Filter Default Message Test
+            pre: true
+            post: true
+      routes: # 개별 마이크로서비스 정보를 routes에 기입함
+        - id: first-service
+          uri: lb://FIRST-SERVICE
+          predicates:
+            - Path=/first-service/**
+          filters:
+            #            - AddRequestHeader=HeaderRequestName,HeaderRequestValue
+            #            - AddResponseHeader=HeaderResponseName,HeaderResponseValue
+            - CustomFilter
+            - LogFilter
+
+        - id: second-service
+          uri: lb://SECOND-SERVICE
+          predicates:
+            - Path=/second-service/**
+          filters:
+            - CustomFilter2
+
+        # user service 라우팅 설정
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/**
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance-id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
