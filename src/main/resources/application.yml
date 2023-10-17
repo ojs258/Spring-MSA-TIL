@@ -1,0 +1,18 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: discovery-client
+
+  profiles:
+    active: EUREKA
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance-id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      default-zone: ${url}
