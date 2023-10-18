@@ -3,6 +3,8 @@ package com.example.userservice.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -24,4 +26,7 @@ public class User {
 
     private String uuid;
 
+    private LocalDateTime createAt;
+
+    private LocalDateTime updateAt;
 }
