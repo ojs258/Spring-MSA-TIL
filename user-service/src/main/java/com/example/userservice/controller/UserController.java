@@ -1,13 +1,14 @@
 package com.example.userservice.controller;
 
 import com.example.userservice.dto.RequestCreateUserDto;
-import com.example.userservice.dto.ResponseUserDto;
+import com.example.userservice.dto.ResponseFindUserDto;
 import com.example.userservice.service.UserService;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("user-service")
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
-    @RequestMapping("health-check")
+    @GetMapping("health-check")
     public String healthCheck() {
         return "healty";
     }
@@ -27,7 +28,12 @@ public class UserController {
     }
 
     @GetMapping("/users/{uuid}")
-    public ResponseEntity<ResponseUserDto> findUser(@PathVariable("uuid") String uuid){
+    public ResponseEntity<ResponseFindUserDto> findUser(@PathVariable("uuid") String uuid){
         return userService.findUser(uuid);
+    }
+
+    @GetMapping("/allUsers")
+    public ResponseEntity<List<ResponseFindUserDto>> findUsers() {
+        return userService.findUsers();
     }
 }

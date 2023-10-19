@@ -1,13 +1,17 @@
 package com.example.userservice.dto;
 
+import com.example.userservice.domain.Order;
 import com.example.userservice.domain.User;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter @NoArgsConstructor
 @Builder @AllArgsConstructor
 @ToString
 // DTO에 맞게 뽑아오는 쿼리를 돌릴땐 ToString을 제외 설정 해줘야한다.
-public class ResponseUserDto {
+public class ResponseFindUserDto {
     private String email;
 
     private String userId;
@@ -16,13 +20,23 @@ public class ResponseUserDto {
 
     private String uuid;
 
-    public static ResponseUserDto createDto(User findUser) {
+    private List<Order> orders;
 
-        return ResponseUserDto.builder()
+    public static ResponseFindUserDto createDto(User findUser) {
+
+        return ResponseFindUserDto.builder()
                 .email(findUser.getEmail())
                 .userId(findUser.getUserId())
                 .name(findUser.getName())
                 .uuid(findUser.getUuid()).build();
+    }
+
+    public ResponseFindUserDto(User findUser) {
+        email = findUser.getEmail();
+        userId = findUser.getUserId();
+        name = findUser.getName();
+        uuid = findUser.getUuid();
+        orders = new ArrayList<>();
     }
 
 }
