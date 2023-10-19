@@ -11,25 +11,28 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
     @Override
+    @Transactional
     public ResponseEntity<String> createUser(RequestCreateUserDto userDto) {
         userRepository.save(userDto.toEntity());
         return ResponseEntity.status(HttpStatus.CREATED).body("회원 가입 완료");
     }
 
     @Override
-    public ResponseEntity<ResponseFindUserDto> findUser(String uuid) {
+    public ResponseEntity<ResponseFindUserDto> findUser(String userId) {
         ResponseFindUserDto dto = ResponseFindUserDto
                 .createDto(
-                    userRepository.findUserByUuid(uuid)
+                    userRepository.findUserByUserId(userId)
                     .orElseThrow(UserNotFoundException::new)
                 );
         dto.setOrders(List.of());

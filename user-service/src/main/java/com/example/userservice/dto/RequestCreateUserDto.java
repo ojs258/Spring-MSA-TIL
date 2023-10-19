@@ -15,13 +15,17 @@ import java.util.UUID;
 // DTO에 맞게 뽑아오는 쿼리를 돌릴땐 ToString을 제외 설정 해줘야한다.
 public class RequestCreateUserDto {
 
+    @NotNull
+    @NotBlank
     private String email;
 
+    @NotNull
+    @NotBlank
     private String pw;
 
+    @NotNull
+    @NotBlank
     private String name;
-
-    private String userId;
 
     public User toEntity() {
 
@@ -29,10 +33,8 @@ public class RequestCreateUserDto {
 
         return User.builder()
                 .email(email)
-                .userId(userId)
                 .encPw(pe.encode(pw))
                 .name(name)
-                .uuid(String.valueOf(UUID.randomUUID()))
                 .createAt(LocalDateTime.now())
                 .build();
     }

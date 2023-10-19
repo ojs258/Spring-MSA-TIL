@@ -27,9 +27,9 @@ public class UserController {
         return userService.createUser(userDto);
     }
 
-    @GetMapping("/users/{uuid}")
-    public ResponseEntity<ResponseFindUserDto> findUser(@PathVariable("uuid") String uuid){
-        return userService.findUser(uuid);
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<ResponseFindUserDto> findUser(@PathVariable("userId") String userId){
+        return userService.findUser(userId);
     }
 
     @GetMapping("/allUsers")

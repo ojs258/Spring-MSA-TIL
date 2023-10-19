@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User,Long> {
-    Optional<User> findUserByUuid(String uuid);
+    Optional<User> findUserByUserId(String userId);
 
     @Query("SELECT new com.example.userservice.dto.ResponseFindUserDto(u) FROM User u")
     List<ResponseFindUserDto> findUsers();

@@ -34,6 +34,18 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/**
+
+        # item service 라우팅 설정
+        - id: item-service
+          uri: lb://ITEM-SERVICE
+          predicates:
+            - Path=/item-service/**
+
+        # order service 라우팅 설정
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order-service/**
 eureka:
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance-id:${random.value}}
