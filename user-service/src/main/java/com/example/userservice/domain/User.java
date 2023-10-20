@@ -2,12 +2,11 @@ package com.example.userservice.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.validator.constraints.UUID;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.repository.Modifying;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -16,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Table(name = "users")
 public class User{
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(updatable = false)
@@ -34,4 +33,9 @@ public class User{
 
     @LastModifiedDate
     private LocalDateTime updateAt;
+
+    @PrePersist
+    private void createUserId(){
+        userId = String.valueOf(UUID.randomUUID());
+    }
 }

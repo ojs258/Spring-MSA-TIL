@@ -1,15 +1,13 @@
+server:
+  port: 0
+
 spring:
+  application:
+    name: user-service
+
   profiles:
     active: DB
 
-  # mysql
-  datasource:
-    url: ${DB.url}
-    username: ${DB.username_}
-    password: ${DB.password}
-    driver-class-name: ${DB.driver}
-
-# JPA
   jpa:
     hibernate:
       ddl-auto: update
@@ -17,19 +15,3 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
-
-  application:
-    name: user-service
-
-
-server:
-  port: 0
-
-eureka:
-  instance:
-    instance-id: ${spring.application.name}:${spring.application.instance-id:${random.value}}
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      default-zone: http://localhost:8761/eureka

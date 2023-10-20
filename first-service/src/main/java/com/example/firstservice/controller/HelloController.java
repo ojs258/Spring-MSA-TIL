@@ -23,6 +23,9 @@ public class HelloController {
     @GetMapping("port-check")
     public String portCheck(){
         // 그냥 server.port로 하면 랜덤배정을위해 yml 파일에 기입한 0이 나옴
-        return env.getProperty("local.server.port");
+        return env.getProperty("local.server.port")
+                + " // "
+                + env.getProperty("test.value")
+                + "진석 시치 키보드 개 구데기...";
     }
 }
