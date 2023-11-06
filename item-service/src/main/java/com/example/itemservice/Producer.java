@@ -6,10 +6,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class Proceducer {
+public class Producer {
     private final RabbitTemplate rabbitTemplate;
 
     public void messageProducer(String message){
-        rabbitTemplate.convertAndSend("testQueue","testMessage");
+        rabbitTemplate.convertAndSend("testQueue",message);
     }
+
+//    public void messageConsumer(String message){
+//        rabbitTemplate.convertAndSend("testQueue",message);
+//    }
 }

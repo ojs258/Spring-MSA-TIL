@@ -15,15 +15,12 @@ import java.util.UUID;
 @AllArgsConstructor
 public class RequestBuyItemDto {
 
-    @NotNull
     @NotBlank
     private String productName;
 
-    @NotNull
     @NotBlank
     private Long stock;
 
-    @NotNull
     @NotBlank
     private Long pricePerItem;
 

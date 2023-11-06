@@ -26,13 +26,6 @@ public class Item {
 
     private Long pricePerItem;
 
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createAt;
-
-    @LastModifiedDate
-    private LocalDateTime updateAt;
-
     @PrePersist
     private void createProductId(){
         productId = String.valueOf(UUID.randomUUID());

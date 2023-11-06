@@ -2,7 +2,7 @@ package com.example.itemservice.service;
 
 import com.example.itemservice.dto.RequestBuyItemDto;
 import com.example.itemservice.dto.ResponseBuyItemDto;
-import org.springframework.data.jpa.repository.Query;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -14,4 +14,7 @@ public interface ItemService {
     ResponseEntity<ResponseBuyItemDto> findItem(String productId);
 
     ResponseEntity<List<ResponseBuyItemDto>> findItems();
+
+    void publishMessage(String message);
+    void createMessage(RequestBuyItemDto itemDto) throws JsonProcessingException;
 }
