@@ -28,11 +28,11 @@ public class OrderController {
 
     @GetMapping("/orders")
     public ResponseEntity<List<ResponseOrderDto>> findOrders() {
-        return null;
+        return orderService.findOrders();
     }
 
     @GetMapping("/orders/{orderId}")
     public ResponseEntity<ResponseOrderDto> findOrder(@PathVariable("orderId") String orderId) {
-        return null;
+        return orderService.findOrder(orderId);
     }
 }

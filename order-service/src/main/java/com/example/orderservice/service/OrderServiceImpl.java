@@ -24,16 +24,14 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public ResponseEntity<ResponseOrderDto> findItem(String productId) {
+    public ResponseEntity<ResponseOrderDto> findOrder(String productId) {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(
-                    orderRepository.findOrder(productId)
-                    .orElseThrow(OrderNotFoundException::new)
-                );
+                .body(orderRepository.findOrder(productId)
+                .orElseThrow(OrderNotFoundException::new));
     }
 
     @Override
-    public ResponseEntity<List<ResponseOrderDto>> findItems() {
+    public ResponseEntity<List<ResponseOrderDto>> findOrders() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(orderRepository.findOrders());
     }
