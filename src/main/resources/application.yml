@@ -1,0 +1,27 @@
+resilience4j:
+  retry:
+    configs:
+      default:
+        max-attempts: 5
+        wait-duration: 1000
+        retry-exceptions:
+          - com.example.resil.exception.RetryException
+        ignore-exceptions:
+          - com.example.resil.exception.IgnoreException
+    instances:
+      retryConfig:
+        base-config: default
+
+  circuitbreaker:
+    configs:
+      default:
+        sliding-window-type: count_based # 최근 요청의 실패에 대한 임계치를 횟수로 산정하겠다는 옵션
+        minimum-number-of-calls: 5 # 5번의 호출 실패전까지는 [close -> open] X
+        sliding-window-size: 10
+        record-exceptions:
+          - com.example.resil.exception.CircuitBreakerException
+        ignore-exceptions:
+          - com.example.resil.exception.IgnoreException
+    instances:
+      circuitBreakerConfig:
+        base-config: default
