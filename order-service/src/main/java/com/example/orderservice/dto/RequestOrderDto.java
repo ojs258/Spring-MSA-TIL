@@ -15,7 +15,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class RequestOrderDto {
 
-    @NotNull
     @NotBlank
     private Long count;
 

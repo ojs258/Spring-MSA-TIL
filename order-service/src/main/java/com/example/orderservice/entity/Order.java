@@ -25,12 +25,7 @@ public class Order {
 
     private Long count;
 
-    @CreatedDate
-    @Column(updatable = false)
     private LocalDateTime createAt;
-
-    @LastModifiedDate
-    private LocalDateTime updateAt;
 
     private String userId;
 
@@ -38,6 +33,7 @@ public class Order {
 
     @PrePersist
     private void createOrderId(){
+        createAt = LocalDateTime.now();
         orderId = String.valueOf(UUID.randomUUID());
     }
 }

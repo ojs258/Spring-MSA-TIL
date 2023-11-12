@@ -26,14 +26,6 @@ public class User{
     private String name;
 
     private String encPw;
-
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createAt;
-
-    @LastModifiedDate
-    private LocalDateTime updateAt;
-
     @PrePersist
     private void createUserId(){
         userId = String.valueOf(UUID.randomUUID());

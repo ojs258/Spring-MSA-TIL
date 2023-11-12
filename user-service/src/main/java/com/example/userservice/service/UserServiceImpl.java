@@ -3,7 +3,9 @@ package com.example.userservice.service;
 import com.example.userservice.domain.Order;
 import com.example.userservice.dto.RequestCreateUserDto;
 import com.example.userservice.dto.ResponseFindUserDto;
+import com.example.userservice.dto.ResponseOrderDto;
 import com.example.userservice.exception.UserNotFoundException;
+import com.example.userservice.feignClient.OrderFeignClient;
 import com.example.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
+    private final OrderFeignClient feignClient;
     @Override
     @Transactional
     public ResponseEntity<String> createUser(RequestCreateUserDto userDto) {
@@ -44,5 +47,15 @@ public class UserServiceImpl implements UserService{
     public ResponseEntity<List<ResponseFindUserDto>> findUsers() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userRepository.findUsers());
+    }
+
+    @Override
+    public ResponseEntity<List<ResponseOrderDto>> findOrders(String userId) {
+        return ResponseEntity.ok(feignClient.getOrderListByUserId(userId).stream()
+                .map(o -> ResponseOrderDto.builder()
+                .orderId(o.getOrderId())
+                .count(o.getCount())
+                .productId(o.getProductId())
+                .build()).toList());
     }
 }

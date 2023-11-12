@@ -17,4 +17,6 @@ public interface OrderRepository extends JpaRepository<Order,Long> {
     @Query("SELECT new com.example.orderservice.dto.ResponseOrderDto(o) " +
             "FROM Order o")
     List<ResponseOrderDto> findOrders();
+
+    List<Order> findOrdersByUserId(String userId);
 }

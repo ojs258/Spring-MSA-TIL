@@ -2,6 +2,7 @@ package com.example.orderservice.service;
 
 import com.example.orderservice.dto.RequestOrderDto;
 import com.example.orderservice.dto.ResponseOrderDto;
+import com.example.orderservice.entity.Order;
 import com.example.orderservice.exception.OrderNotFoundException;
 import com.example.orderservice.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,11 @@ public class OrderServiceImpl implements OrderService{
     public ResponseEntity<List<ResponseOrderDto>> findOrders() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(orderRepository.findOrders());
+    }
+
+    @Override
+    public ResponseEntity<List<Order>> findOrdersByUserId(String userId) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(orderRepository.findOrdersByUserId(userId));
     }
 }

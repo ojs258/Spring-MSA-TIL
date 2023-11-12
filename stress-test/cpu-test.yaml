@@ -1,0 +1,15 @@
+config:
+  target: http://34.64.42.56:8761
+  phases:
+    - duration: 30
+      arrivalRate: 2
+      name: warmup
+    - duration: 100
+      arrivalRate: 500
+      name: stress-test
+scenarios:
+  - flow:
+      - get:
+          url: "/"
+#       - get:
+#           url: "/armadillo"

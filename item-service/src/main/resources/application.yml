@@ -14,6 +14,9 @@ spring:
     password: guest
     port: 5672 # 대시보드 포트 X 엔진 포트 O
 
+  kafka:
+    bootstrap-servers: localhost:9092
+
   jpa:
     hibernate:
       ddl-auto: update

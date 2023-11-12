@@ -35,7 +35,6 @@ public class RequestCreateUserDto {
                 .email(email)
                 .encPw(pe.encode(pw))
                 .name(name)
-                .createAt(LocalDateTime.now())
                 .build();
     }
 }
